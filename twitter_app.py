@@ -99,7 +99,7 @@ def get_friend_tweets(token, csvfile, friends, n):
 def main():
 
 	headers = {"Authorization": get_access_token()}
-	friends = get_friends(headers, "", 10)
+	friends = get_friends(headers, "fabzialous", 10)
 	tweets = get_friend_tweets(headers, "test.csv", friends, 10)
 
 
