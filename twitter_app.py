@@ -39,7 +39,7 @@ def get_friends(token, screen_name, n):
 
 	#get list of people you follow 
 	params = {"count": n, "screen_name": screen_name}
-	req = requests.get(friends_url, params=params, headers=headers)
+	req = requests.get(friends_url, params=params, headers=token)
 	friends = []
 	
 	try:
@@ -90,8 +90,11 @@ def get_friend_tweets(token, csvfile, friends, n):
 	#and the tweets as the features		
 	with open(csvfile, "w") as csv_file:
 		writer = csv.writer(csv_file, delimiter=',')
+
 		for ft in tweets_list:
-			writer.writerow(ft)
+			for i in range(1, len(ft)):
+				row = [ft[0], ft[i]]
+		 		writer.writerow(row)
 
 	return tweets_list
 
@@ -99,8 +102,20 @@ def get_friend_tweets(token, csvfile, friends, n):
 def main():
 
 	headers = {"Authorization": get_access_token()}
-	friends = get_friends(headers, "fabzialous", 10)
-	tweets = get_friend_tweets(headers, "test.csv", friends, 10)
+	friends = get_friends(headers, "twhiddleston", 2)
+	tweets = get_friend_tweets(headers, "data.csv", friends, 2)
+
+	# # On Google Cloud Storage
+	# filename = '/gs/cis192_prediction_test/data.csv'
+	# writable_file_name = files.gs.create(filename, mime_type='application/octet-stream', acl='public-read')
+
+	# # Open and write the file.
+	# with files.open(writable_file_name, 'a') as fout:
+	# 	with open('data.csv', 'r') as fin:
+	# 	    line = fin.readLine()
+	# 	    while line != '':
+	# 	    	f.write(line)
+	# 	    	line = fin.readLine()
 
 
 if __name__ == "__main__":
