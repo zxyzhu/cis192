@@ -77,6 +77,8 @@ def main(argv):
   if credentials is None or credentials.invalid:
     credentials = tools.run_flow(FLOW, storage, flags)
 
+  print credentials
+
   # Create an httplib2.Http object to handle our HTTP requests and authorize it
   # with our good Credentials.
   http = httplib2.Http()

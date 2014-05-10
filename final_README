@@ -1,0 +1,6 @@
+README
+
+The goal of our project is to explore the Twitter and Google Predictions API. We created an app that predicts which Twitter user potentially tweeted a given message. 
+Given a Twitter username, we first find the people he/she follows. We then collect tweets from those people and store them inside a CSV file. 
+We then upload our data set to Google cloud storage, where we use that data for predictions. We create a training model from that data set. When the training model is built, we let users input a message. We then send a predict request with that message and use the training set to see which user in the set is most likely to have tweeted that message. 
+We deployed our app on the Google App Engine.  
